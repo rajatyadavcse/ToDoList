@@ -50,7 +50,7 @@ async function addTasks(userEnteredValue){
 
 // delete task function
 async function deleteTask(taskId){
-  var Url = baseurl + "todo/task/delete/"+taskId;
+  var Url = baseUrl + "todo/task/delete/"+taskId;
   const response = fetch(Url);
   showTasks(); //call the showTasks function
 }
