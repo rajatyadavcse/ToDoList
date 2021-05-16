@@ -19,14 +19,14 @@ showTasks(); //calling showTask function
 addBtn.onclick = ()=>{ //when user click on plus icon button
   let userEnteredValue = inputBox.value; //getting input field value
   addTasks(userEnteredValue);
-  showTasks(); //calling showTask function
+
   addBtn.classList.remove("active"); //unactive the add button once the task added
 }
 async function addTasks(userEnteredValue){
   var Url = baseUrl+"todo/task/create/"+userEnteredValue;
   const response = await fetch(Url);
   const listArray = await response.json();
-  showTasks();
+  showTasks();//calling showTask function
 }
   async function showTasks(){
   var Url = baseUrl + "todo/task/list";
@@ -41,7 +41,7 @@ async function addTasks(userEnteredValue){
     deleteAllBtn.classList.remove("active"); //unactive the delete button
   }
   let newLiTag = "";
-  listArray.forEach((element, index) => {
+  listArray.forEach((element) => {
     newLiTag += `<li>${element.taskName}<span class="icon" onclick="deleteTask(${element.taskId})"><i class="fas fa-trash"></i></span></li>`;
   });
   todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
@@ -51,7 +51,7 @@ async function addTasks(userEnteredValue){
 // delete task function
 async function deleteTask(taskId){
   var Url = baseUrl + "todo/task/delete/"+taskId;
-  const response = fetch(Url);
+  const response = await fetch(Url);
   showTasks(); //call the showTasks function
 }
 
@@ -61,6 +61,6 @@ deleteAllBtn.onclick = ()=>{
 }
 async function deleteAllTask(){
   var Url = baseUrl +"todo/task/delete";
-  const response = fetch(Url);
+  const response = await fetch(Url);
   showTasks(); //call the showTasks function
 }
